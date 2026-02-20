@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ececec;
+            font-family: Tahoma, Geneva, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .panel-registro {
+            background-color: #ffffff;
+            width: 340px;
+            padding: 30px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+        }
+
+        .titulo-registro {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+        }
+
+        .campo label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .campo input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #999999;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .boton-guardar {
+            width: 100%;
+            padding: 10px;
+            background-color: #2e7d32;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .area-extra {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .area-extra a {
+            text-decoration: none;
+            color: #1565c0;
+        }
+
+        .mensaje {
+            margin-top: 12px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .mensaje-ok {
+            color: green;
+        }
+
+        .mensaje-error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="panel-registro">
+
+        <div class="titulo-registro">
+            <strong>REGÍSTRATE</strong>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="campo">
+                <label>Correo electrónico</label>
+                <input type="email" name="email" placeholder="ejemplo@correo.com" required>
+            </div>
+
+            <div class="campo">
+                <label>Contraseña</label>
+                <input type="password" name="password" placeholder="Mínimo 6 caracteres" required>
+            </div>
+
+            <button type="submit" class="boton-guardar">
+                Crear cuenta
+            </button>
+
+            <div class="area-extra">
+                <div>¿Ya tienes cuenta?</div>
+                <a href="{% url 'login' %}">Iniciar sesión</a>
+            </div>
+
+            {% if mensaje %}
+                <div class="mensaje {% if '✅' in mensaje %}mensaje-ok{% else %}mensaje-error{% endif %}">
+                    {{ mensaje }}
+                </div>
+            {% endif %}
+
+        </form>
+
+    </div>
+
+</body>
+</html>

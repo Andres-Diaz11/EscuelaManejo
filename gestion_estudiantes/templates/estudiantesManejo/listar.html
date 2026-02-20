@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Estudiantes</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Verdana, Geneva, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .cabecera {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            grid-column: 1/4;
+        }
+
+        .cabecera h2 {
+            color: #1976d2;
+            margin: 0;
+        }
+
+        .enlaces {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .enlaces a {
+            text-decoration: none;
+            padding: 8px 12px;
+            background-color: #1976d2;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .enlaces a.nuevo {
+            background-color: #2e7d32;
+        }
+
+        .lista-estudiantes {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .estudiante {
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 30px;
+            margin-left: 30px;
+        }
+
+        .nombre-estudiante {
+            font-size: 18px;
+            color: #1976d2;
+            margin: 0 0 8px 0;
+        }
+
+        .info-estudiante {
+            font-size: 14px;
+            margin: 2px 0;
+        }
+
+        .acciones-estudiante {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .acciones-estudiante a {
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #fff;
+        }
+
+        .acciones-estudiante a.editar {
+            background-color: #1976d2;
+        }
+
+        .acciones-estudiante a.eliminar {
+            background-color: #c62828;
+        }
+
+        .sin-estudiantes {
+            text-align: center;
+            font-size: 14px;
+            color: #555555;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px){
+            body{
+                display: grid;
+                grid-template-columns: auto;
+            }
+
+            .cabecera {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                grid-column: 1/2;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cabecera">
+        <h2>Mis estudiantes 📚</h2>
+        <div class="enlaces">
+            <a href="{% url 'dashboard' %}">Ver mi perfil</a>
+            <a class="nuevo" href="{% url 'anadir_estudiante_manejo' %}">➕ Nuevo Estudiante</a>
+        </div>
+    </div>
+    {% for estudiante in estudiantes %}
+    <div class="estudiante">
+        <p class="nombre-estudiante">{{ estudiante.nombre_estudiante }}</p>
+        <p class="info-estudiante"><strong>Edad:</strong> {{ estudiante.edad }}</p>
+        <p class="info-estudiante"><strong>Correo:</strong> {{ estudiante.correo }}</p>
+        <div class="acciones-estudiante">
+            <a class="editar" href="{% url 'editar_estudiante_manejo' estudiante.id %}">Editar</a>
+            <a class="eliminar" href="{% url 'eliminar_estudiante_manejo' estudiante.id %}"
+                onclick="return confirm('¿Eliminar este/a estudiante?')">Borrar</a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="sin-estudiantes">
+        No hay estudiantes registrados.
+    </div>
+    {% endfor %}
+
+</body>
+</html>

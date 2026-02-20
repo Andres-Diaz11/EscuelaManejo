@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Principal</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .encabezado-panel {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .encabezado-panel h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .encabezado-panel h2 {
+            margin-top: 8px;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .zona-principal {
+            display: flex;
+            justify-content: center;
+            padding: 40px 15px;
+        }
+
+        .panel-informacion {
+            background-color: #ffffff;
+            width: 450px;
+            padding: 30px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #1976d2;
+        }
+
+        .bloque-dato {
+            background-color: #f7f7f7;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .area-botones {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .boton-enlace {
+            display: inline-block;
+            padding: 10px 18px;
+            margin-bottom: 12px;
+            background-color: #1976d2;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .boton-salida {
+            padding: 10px 18px;
+            background-color: #c62828;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .alerta {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .alerta.success {
+            background-color: #d0f0d0;
+            color: #2e7d32;
+        }
+
+        .alerta.error {
+            background-color: #f8d7da;
+            color: #c62828;
+        }
+
+        .alerta.warning {
+            background-color: #fff3cd;
+            color: #b26a00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="encabezado-panel">
+        <h1>Ver info de mi Perfil</h1>
+        <h2>Bienvenid@ {{ datos.rol }}</h2>
+    </div>
+
+    <div class="zona-principal">
+        <div class="panel-informacion">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alerta {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="titulo-seccion">
+                Información del {{ datos.rol }}
+            </div>
+
+            <div class="bloque-dato">
+                <strong>Correo:</strong> {{ datos.email }}
+            </div>
+
+            <div class="bloque-dato">
+                <strong>UID:</strong> {{ datos.uid }}
+            </div>
+
+            <div class="bloque-dato">
+                <strong>Rol:</strong> {{ datos.rol }}
+            </div>
+
+            <div class="bloque-dato">
+                <strong>Fecha de registro:</strong> {{ datos.fecha_registro }}
+            </div>
+
+            <div class="area-botones">
+
+                <a href="{% url 'listar_estudiantesManejo_manejo' %}" class="boton-enlace">
+                    Ver mis estudiantes
+                </a>
+
+                <form action="{% url 'logout' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="boton-salida">
+                        Cerrar sesión
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

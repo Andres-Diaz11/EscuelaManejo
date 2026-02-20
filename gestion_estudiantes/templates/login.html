@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Usuario</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .contenedor-login {
+            background-color: #ffffff;
+            padding: 30px;
+            width: 320px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+        }
+
+        .titulo-login {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .grupo-campo {
+            margin-bottom: 15px;
+        }
+
+        .etiqueta {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .entrada {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #999999;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .boton-login {
+            width: 100%;
+            padding: 10px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .seccion-extra {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .enlace-registro {
+            text-decoration: none;
+            color: #1565c0;
+        }
+
+        .mensaje {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .mensaje.success {
+            color: green;
+        }
+
+        .mensaje.error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-login">
+        <div class="titulo-login">
+            <strong>INICIAR SESIÓN</strong>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="grupo-campo">
+                <label class="etiqueta">Correo electrónico</label>
+                <input class="entrada" type="email" name="email" placeholder="ejemplo@correo.com" required>
+            </div>
+
+            <div class="grupo-campo">
+                <label class="etiqueta">Contraseña</label>
+                <input class="entrada" type="password" name="password" placeholder="Ingresa tu contraseña" required>
+            </div>
+
+            <button class="boton-login" type="submit">
+                Ingresar
+            </button>
+
+            <div class="seccion-extra">
+                <p>¿No tienes cuenta?</p>
+                <a class="enlace-registro" href="{% url 'registro' %}">
+                    Crear cuenta
+                </a>
+            </div>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="mensaje {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Estudiante</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Verdana, Geneva, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .formulario-editar {
+            background-color: #ffffff;
+            width: 320px;
+            padding: 30px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+        }
+
+        .titulo-formulario {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #1976d2;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+        }
+
+        .campo label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .campo input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #999999;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .campo input:focus {
+            border-color: #1976d2;
+            outline: none;
+        }
+
+        .boton-guardar {
+            width: 100%;
+            padding: 10px;
+            background-color: #2e7d32;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .enlace-cancelar {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #c62828;
+            text-decoration: none;
+        }
+
+        .enlace-cancelar:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <form class="formulario-editar" method="POST">
+        {% csrf_token %}
+
+        <div class="titulo-formulario">Editar Información del Estudiante</div>
+
+        <div class="campo">
+            <label>Nombre del estudiante:</label>
+            <input type="text" name="nombre_estudiante" value="{{ estudiante.nombre_estudiante }}" required>
+        </div>
+
+        <div class="campo">
+            <label>Edad:</label>
+            <input type="number" name="edad" value="{{ estudiante.edad }}" required>
+        </div>
+
+        <div class="campo">
+            <label>Correo electrónico:</label>
+            <input type="email" name="correo" value="{{ estudiante.correo }}">
+        </div>
+
+        <button type="submit" class="boton-guardar">Guardar Cambios</button>
+        <a href="{% url 'listar_estudiantesManejo_manejo' %}" class="enlace-cancelar">Cancelar</a>
+    </form>
+
+</body>
+</html>

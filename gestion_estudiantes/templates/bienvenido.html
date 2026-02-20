@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .contenedor-principal {
+            background-color: #ffffff;
+            padding: 40px;
+            width: 400px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+        }
+
+        .titulo-principal {
+            margin-bottom: 15px;
+            font-size: 26px;
+            color: #333333;
+        }
+
+        .descripcion {
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #555555;
+        }
+
+        .grupo-botones {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #eeeeee;
+            border-radius: 6px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            margin: 8px;
+            text-decoration: none;
+            color: #ffffff;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .btn-registro {
+            background-color: #388e3c;
+        }
+
+        .btn-login {
+            background-color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-principal">
+        <div class="titulo-principal">
+            ¡BIENVENIDO!
+        </div>
+
+        <div class="descripcion">
+            Sistema de Gestión de Estudiantes
+        </div>
+
+        <div class="descripcion">
+            Si eres Instructor/a de manejo, selecciona una opción para continuar:
+        </div>
+
+        <div class="grupo-botones">
+            <a href="{% url 'registro' %}" class="btn btn-registro">
+                Registrarme
+            </a>
+
+            <a href="{% url 'login' %}" class="btn btn-login">
+                Iniciar Sesión
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
